@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+fixme   not able to add classes easily to the root component
+        https://github.com/inertiajs/inertia-laravel/issues/370
+*/
+#app {
+    @apply h-screen;
+}
