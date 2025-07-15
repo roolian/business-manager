@@ -8,7 +8,7 @@ const useEffectAfterMount = (cb: EffectCallback, dependencies: DependencyList | 
       return cb()
     }
     mounted.current = false
-  }, dependencies) // eslint-disable-line react-hooks/exhaustive-deps
+  }, dependencies) 
 }
 
 export { useEffectAfterMount }

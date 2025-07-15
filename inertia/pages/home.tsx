@@ -1,15 +1,5 @@
 import { Head } from '@inertiajs/react'
-import { Button, Sidebar } from 'flowbite-react'
-import { Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from 'flowbite-react'
-import {
-  HiArrowSmRight,
-  HiChartPie,
-  HiInbox,
-  HiShoppingBag,
-  HiTable,
-  HiUser,
-  HiViewBoards,
-} from 'react-icons/hi'
+import { Button } from 'flowbite-react'
 
 export default function Home() {
   return (

@@ -2,9 +2,9 @@ import { Link, usePage } from '@inertiajs/react'
 import { Sidebar } from 'flowbite-react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { HiChartPie, HiOfficeBuilding } from 'react-icons/hi'
+import { HiChartPie, HiIdentification, HiOfficeBuilding } from 'react-icons/hi'
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { url } = usePage()
 
   return (
@@ -26,6 +26,24 @@ export default function MainLayout({ children }) {
                   active={url === '/clients'}
                 >
                   Clients
+                </Sidebar.Item>
+                <Sidebar.Item
+                  as={Link}
+                  href="/contacts"
+                  icon={HiIdentification}
+                  labelColor="dark"
+                  active={url === '/contacts'}
+                >
+                  Contacts
+                </Sidebar.Item>
+                <Sidebar.Item
+                  as={Link}
+                  href="/quotes"
+                  icon={HiIdentification}
+                  labelColor="dark"
+                  active={url === '/quotes'}
+                >
+                  Devis
                 </Sidebar.Item>
               </Sidebar.ItemGroup>
             </Sidebar.Items>

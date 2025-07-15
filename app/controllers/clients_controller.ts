@@ -10,6 +10,8 @@ export default class ClientsController {
     const clientsQuery = Client.query()
     if (queryParams.orderby && queryParams.direction) {
       clientsQuery.orderBy(queryParams.orderby, queryParams.direction)
+    } else {
+      clientsQuery.orderBy('createdAt', 'desc')
     }
     if (queryParams.s) {
       clientsQuery.where('name', 'like', `%${queryParams.s}%`)
@@ -28,13 +30,14 @@ export default class ClientsController {
 
   async store({ response, request }: HttpContext) {
     const data = await request.validateUsing(updateClientValidator)
-    const user = await Client.create(data)
+    await Client.create(data)
 
     return response.redirect().toRoute('clients.index')
   }
 
   async edit({ inertia, params }: HttpContext) {
-    const client = await Client.find(params.id)
+    const client = await Client.findOrFail(params.id)
+    client?.load('contacts')
 
     return inertia.render('clients/edit', { client })
   }
