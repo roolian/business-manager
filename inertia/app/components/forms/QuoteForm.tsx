@@ -26,7 +26,6 @@ const QuoteForm = ({ quote, contacts, onSubmit, className }: QuoteFormProps) => 
     title: quote?.title,
   })
 
-  const [rows, setRows] = useState<QuoteRow[]>(quote?.rows || [])
 
   function onChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
