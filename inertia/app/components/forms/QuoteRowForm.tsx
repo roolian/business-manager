@@ -37,15 +37,17 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
   const defaultRow: QuoteRowValues = {
     description: '',
     amount: 0,
+    unit: 'j/h',
     quantity: 0,
   }
 
   const rowFields = [
     { id: 'description', label: 'Description', type: 'text' },
     { id: 'amount', label: 'Amount', type: 'number' },
+    { id: 'unit', label: 'Unit', type: 'text' },
     { id: 'quantity', label: 'Quantity', type: 'number' },
   ]
-  const inputClass = 'w-full !border-0 !ring-0 outline-hidden focus:outline-offset-2 focus:outline-blue-200 '
+  const inputClass = 'w-full border-0 focus:ring-0  focus:outline-offset-2 focus:outline-blue-200 '
 
   console.log(errors)
 
@@ -56,6 +58,7 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
         <TableHead>
           <TableHeadCell>Description</TableHeadCell>
           <TableHeadCell>Amount</TableHeadCell>
+          <TableHeadCell>Unit</TableHeadCell>
           <TableHeadCell>Quantity</TableHeadCell>
           <TableHeadCell></TableHeadCell>
         </TableHead>
@@ -66,7 +69,7 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
                 <TableCell key={field.id} className="py-0 px-1">
                   <input
                     className={cn(inputClass, {
-                      'outline-red-200  outline-hidden': errors?.[`rows.${index}.${field.id as any}`],
+                      'ring-red-200 ring-2': errors?.[`rows.${index}.${field.id as any}`],
                     })}
                     type={field.type}
                     id={`row-${index}-${field.id}`}

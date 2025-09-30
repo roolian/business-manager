@@ -1,5 +1,5 @@
 // app/models/quote.ts
-import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeSave, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Contact from './contact.js'
 import { DateTime } from 'luxon'
@@ -32,4 +32,17 @@ export default class Quote extends BaseModel {
 
   @hasMany(() => QuoteRow)
   declare rows: HasMany<typeof QuoteRow>
+
+  @beforeSave()
+  static async updateAmount(quote: Quote) {
+    if (quote.id) {
+      await quote.load('rows')
+      const total = quote.rows.reduce((t, row) => {
+        return t + row.amount * row.quantity
+      }, 0)
+      quote.amount = total
+    } else {
+      quote.amount = 0
+    }
+  }
 }

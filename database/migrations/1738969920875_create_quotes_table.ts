@@ -14,6 +14,7 @@ export default class extends BaseSchema {
         .onDelete('CASCADE')
       table.text('title')
       table.text('description')
+      table.float('amount')
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()
     })

@@ -24,6 +24,7 @@ export const updateQuoteRowsValidator = vine.compile(
         id: vine.number().optional(),
         description: vine.string().trim().optional(),
         amount: vine.number().min(0),
+        unit: vine.string().trim(),
         quantity: vine.number().min(0),
       })
     ),

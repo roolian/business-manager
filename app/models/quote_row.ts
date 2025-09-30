@@ -14,7 +14,7 @@ export default class QuoteRow extends BaseModel {
   declare quantity: number
 
   @column()
-  declare unit: number
+  declare unit: string
 
   @column()
   declare description: string

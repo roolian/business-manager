@@ -1,12 +1,17 @@
 // app/controllers/quotes_controller.ts
 import type { HttpContext } from '@adonisjs/core/http'
 
-import { indexQuoteValidator, updateQuoteRowsValidator, updateQuoteValidator } from '#validators/quote'
+import {
+  indexQuoteValidator,
+  updateQuoteRowsValidator,
+  updateQuoteValidator,
+} from '#validators/quote'
 import Quote from '#models/quote'
 import string from '@adonisjs/core/helpers/string'
 import db from '@adonisjs/lucid/services/db'
 import Contact from '#models/contact'
-import QuoteRow from "#models/quote_row"
+import QuoteRow from '#models/quote_row'
+import _ from 'lodash'
 
 export default class QuotesController {
   async index({ inertia, request }: HttpContext) {
@@ -92,19 +97,16 @@ export default class QuotesController {
     const data = await request.validateUsing(updateQuoteRowsValidator)
     data.rows.forEach(async (row) => {
       if (row.id) {
-        await QuoteRow.query().where('id', row.id).update({
-          description: row.description,
-          amount: row.amount,
-          quoteId: params.id,
-        })
+        await QuoteRow.query()
+          .where('id', row.id)
+          .update(_.omit(row, ['id']))
       } else {
-        await QuoteRow.create({
-          description: row.description,
-          amount: row.amount,
-          quoteId: params.id,
-        })
+        await QuoteRow.create({ ...row, quoteId: params.id })
       }
     })
+
+    const quote = await Quote.findOrFail(params.id)
+    await quote.save()
 
     return response.redirect().toRoute('quotes.edit', { id: params.id })
   }
