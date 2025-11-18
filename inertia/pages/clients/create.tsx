@@ -2,7 +2,12 @@ import { Head, router } from '@inertiajs/react'
 import { toast } from 'react-toastify'
 import ClientForm, { ClientFormValues } from '~/app/components/forms/ClientForm'
 
-export default function ClientCreate() {
+interface ClientCreateProps {
+  recommendedReference: string
+}
+
+
+export default function ClientCreate( { recommendedReference } : ClientCreateProps) {
   function handleSubmit(values: ClientFormValues) {
     router.post('/clients/create', values, {
       onSuccess: () => toast.success('Client créé avec succès'),
@@ -16,7 +21,7 @@ export default function ClientCreate() {
 
       <div className="page-content">
         <h1>Créer un nouveau client</h1>
-        <ClientForm onSubmit={handleSubmit} />
+        <ClientForm onSubmit={handleSubmit} recommendedReference={recommendedReference} />
       </div>
     </>
   )

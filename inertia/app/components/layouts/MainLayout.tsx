@@ -2,7 +2,8 @@ import { Link, usePage } from '@inertiajs/react'
 import { Sidebar } from 'flowbite-react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { HiChartPie, HiIdentification, HiOfficeBuilding } from 'react-icons/hi'
+import { FaAddressBook, FaBuilding, FaCalculator, FaChartPie } from 'react-icons/fa6'
+
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { url } = usePage()
@@ -15,13 +16,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <Sidebar.Logo href="/" img="/images/logoipsum-325.svg" imgAlt="Flowbite logo" />
             <Sidebar.Items>
               <Sidebar.ItemGroup className="bg-none">
-                <Sidebar.Item as={Link} href="/" icon={HiChartPie} active={url === '/'}>
+                <Sidebar.Item as={Link} href="/" icon={FaChartPie} active={url === '/'}>
                   Dashboard
                 </Sidebar.Item>
                 <Sidebar.Item
                   as={Link}
                   href="/clients"
-                  icon={HiOfficeBuilding}
+                  icon={FaBuilding}
                   labelColor="dark"
                   active={url === '/clients'}
                 >
@@ -30,7 +31,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 <Sidebar.Item
                   as={Link}
                   href="/contacts"
-                  icon={HiIdentification}
+                  icon={FaAddressBook}
                   labelColor="dark"
                   active={url === '/contacts'}
                 >
@@ -39,7 +40,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 <Sidebar.Item
                   as={Link}
                   href="/quotes"
-                  icon={HiIdentification}
+                  icon={FaCalculator}
                   labelColor="dark"
                   active={url === '/quotes'}
                 >

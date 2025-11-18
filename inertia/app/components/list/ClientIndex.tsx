@@ -1,6 +1,6 @@
 import { router } from '@inertiajs/react'
 import { ColumnInterface, CrudList, CrudListQuery } from '../crud/CrudList'
-import { ModelObject } from "@adonisjs/lucid/types/model"
+import { ModelObject } from '@adonisjs/lucid/types/model'
 
 interface ClientIndexProps {
   clientsData: {

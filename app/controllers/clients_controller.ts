@@ -19,13 +19,19 @@ export default class ClientsController {
 
     const clients = await clientsQuery.paginate(queryParams.page ?? 1, 8)
     const clientsData = clients.serialize()
-    console.log(queryParams)
 
     return inertia.render('clients/index', { clientsData, queryParams })
   }
 
   async create({ inertia }: HttpContext) {
-    return inertia.render('clients/create')
+
+    const lastClient = await Client.query().orderBy('reference', 'desc').first()
+
+    const recommendedReference = lastClient
+      ? (Number.parseInt(lastClient.reference, 10) + 1).toString().padStart(4, '0')
+      : '0001'
+
+    return inertia.render('clients/create', { recommendedReference })
   }
 
   async store({ response, request }: HttpContext) {

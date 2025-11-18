@@ -1,11 +1,14 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeCreate, column, hasMany } from '@adonisjs/lucid/orm'
 import Contact from './contact.js'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Client extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare reference: string
 
   @column()
   declare name: string

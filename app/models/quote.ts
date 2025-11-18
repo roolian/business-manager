@@ -1,13 +1,20 @@
 // app/models/quote.ts
 import { BaseModel, beforeSave, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Contact from './contact.js'
 import { DateTime } from 'luxon'
 import QuoteRow from '#models/quote_row'
+import Contact from '#models/contact'
+import type { ValidationStatus } from '#types/quote_type'
 
 export default class Quote extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare reference: string
+
+  @column()
+  declare validationStatus: ValidationStatus
 
   @column()
   declare contactId: number
@@ -27,7 +34,7 @@ export default class Quote extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => Contact, { serializeAs: 'contact' })
+  @belongsTo(() => Contact)
   declare contact: BelongsTo<typeof Contact>
 
   @hasMany(() => QuoteRow)

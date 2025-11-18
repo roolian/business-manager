@@ -3,7 +3,7 @@ import Quote from '#models/quote'
 import { router } from '@inertiajs/react'
 import { toast } from 'react-toastify'
 import QuoteForm, { QuoteFormValues } from '~/app/components/forms/QuoteForm'
-import { QuoteRowForm, QuoteRowFormValues } from '~/app/components/forms/QuoteRowForm'
+import { QuoteRowForm, QuoteRowFormValues } from '~/app/components/forms/quote-row/QuoteRowForm'
 
 type PageQuoteEditProps = {
   quote: Quote
@@ -21,12 +21,15 @@ export default function Edit({ quote, contacts }: PageQuoteEditProps) {
     router.post('/quotes/' + quote.id + '/rows', values, {
       onSuccess: () => toast.success('Devis mis à jour avec succès'),
       onError: () => toast.error('Vérifiez les données'),
+      preserveScroll: true,
+
     })
   }
   function handleDeleteRow(id: number) {
     router.delete('/quotes/' + quote.id + '/rows/' + id, {
       onSuccess: () => toast.success('Ligne de devis supprimée avec succès'),
       onError: () => toast.error('Vérifiez les données'),
+      preserveScroll: true,
     })
   }
 

@@ -12,6 +12,8 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('contacts')
         .onDelete('CASCADE')
+      table.text('reference').unique()
+      table.text('validation_status')
       table.text('title')
       table.text('description')
       table.float('amount')

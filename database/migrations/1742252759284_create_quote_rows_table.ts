@@ -1,3 +1,4 @@
+import { QuoteRowType } from '#types/quote_type'
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
@@ -8,8 +9,10 @@ export default class extends BaseSchema {
       table.increments('id')
       table.float('amount')
       table.float('quantity')
-      table.float('unit')
-      table.float('description')
+      table.integer('order')
+      table.string('unit')
+      table.text('description')
+      table.enum('type', Object.values(QuoteRowType)).defaultTo('default')
 
       table.integer('quote_id').unsigned().references('id').inTable('quotes').onDelete('CASCADE')
 

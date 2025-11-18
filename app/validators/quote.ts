@@ -1,4 +1,5 @@
 // app/validators/quote.ts
+import { QuoteRowType, VALIDATION_STATUS } from '#types/quote_type'
 import vine from '@vinejs/vine'
 
 export const indexQuoteValidator = vine.compile(
@@ -15,6 +16,8 @@ export const updateQuoteValidator = vine.compile(
     title: vine.string().trim(),
     description: vine.string().trim(),
     contactId: vine.number(),
+    validationStatus: vine.enum(Object.values(VALIDATION_STATUS)),
+    reference: vine.string().trim().optional(),
   })
 )
 export const updateQuoteRowsValidator = vine.compile(
@@ -23,9 +26,11 @@ export const updateQuoteRowsValidator = vine.compile(
       vine.object({
         id: vine.number().optional(),
         description: vine.string().trim().optional(),
-        amount: vine.number().min(0),
-        unit: vine.string().trim(),
-        quantity: vine.number().min(0),
+        amount: vine.number().min(0).optional().requiredIfExists(['quantity']),
+        unit: vine.string().trim().optional(),
+        quantity: vine.number().min(0).optional().requiredIfAnyExists(['amount']),
+        type: vine.enum(Object.values(QuoteRowType)).optional(),
+        order: vine.number(),
       })
     ),
   })

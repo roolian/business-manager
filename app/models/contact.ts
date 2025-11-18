@@ -29,9 +29,9 @@ export default class Contact extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => Client, { serializeAs: 'client' })
+  @belongsTo(() => Client)
   declare client: BelongsTo<typeof Client>
 
-  @hasMany(() => Quote, { serializeAs: 'quote' })
+  @hasMany(() => Quote)
   declare quotes: HasMany<typeof Quote>
 }

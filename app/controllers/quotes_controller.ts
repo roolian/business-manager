@@ -6,11 +6,11 @@ import {
   updateQuoteRowsValidator,
   updateQuoteValidator,
 } from '#validators/quote'
-import Quote from '#models/quote'
 import string from '@adonisjs/core/helpers/string'
 import db from '@adonisjs/lucid/services/db'
 import Contact from '#models/contact'
 import QuoteRow from '#models/quote_row'
+import Quote from '#models/quote'
 import _ from 'lodash'
 
 export default class QuotesController {
@@ -70,8 +70,14 @@ export default class QuotesController {
   }
 
   async edit({ inertia, params }: HttpContext) {
-    const quote = await Quote.findOrFail(params.id)
-    await quote.load('rows')
+    const quote = await Quote.query()
+      .where('id', params.id)
+      .preload('rows')
+      .preload('contact' as any, (contactQuery: any) => {
+        contactQuery.preload('client')
+      })
+      .firstOrFail()
+
     const contacts: Contact[] = await Contact.query()
       .preload('client')
       .join('clients', 'clients.id', 'contacts.client_id')
@@ -88,6 +94,8 @@ export default class QuotesController {
       title: data.title,
       description: data.description,
       contactId: data.contactId,
+      validationStatus: data.validationStatus,
+      reference: data.reference,
     })
 
     return response.redirect().toRoute('quotes.edit', { id: params.id })

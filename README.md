@@ -106,6 +106,7 @@ npx eslint . --no-ignore
 ---
 
 Si vous voulez, je peux aussi :
+
 - ajouter un `README.dev.md` avec des étapes plus détaillées, ou
 - créer un `.env.example` si celui-ci manque, ou
 - corriger l'erreur ESLint en vérifiant `.eslintignore` et `eslint.config.js`.

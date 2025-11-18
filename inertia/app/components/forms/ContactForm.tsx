@@ -55,7 +55,13 @@ const ContactForm: React.FC<ContactForm> = ({
         <div className="space-y-6">
           <FieldRow type="text" label="Prénom" name="firstName" values={values} {...{ onChange }} />
           <FieldRow type="text" label="Nom" name="lastName" values={values} {...{ onChange }} />
-          <FieldRow type="text" label="Civilité" name="civility" values={values} {...{ onChange }} />
+          <FieldRow
+            type="text"
+            label="Civilité"
+            name="civility"
+            values={values}
+            {...{ onChange }}
+          />
           {clients && (
             <FieldRow label="Client" name="clientId" values={values} {...{ onChange }}>
               <Select id="clientId" onChange={onChange}>

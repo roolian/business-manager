@@ -8,10 +8,11 @@ export interface FieldRowProps {
   onChange?: ChangeEventHandler
   values?: { [key: string]: string | number }
   type?: 'text' | 'email' | 'number' | 'password' | 'textarea'
+  disabled?: boolean
   children?: React.ReactNode
 }
 
-const FieldRow: FC<FieldRowProps> = ({children, type, name, label, onChange, values }) => {
+const FieldRow: FC<FieldRowProps> = ({ children, type, name, label, onChange, values, disabled = false }) => {
   const { errors } = usePage().props
 
   const displayField = (type: string) => {
@@ -26,6 +27,7 @@ const FieldRow: FC<FieldRowProps> = ({children, type, name, label, onChange, val
             className="w-full"
             onChange={onChange}
             color={errors?.[name] && 'failure'}
+            disabled={disabled}
           />
         )
       case 'email':
@@ -60,7 +62,7 @@ const FieldRow: FC<FieldRowProps> = ({children, type, name, label, onChange, val
         )
       case 'textarea':
         return (
-          <Textarea 
+          <Textarea
             id={name}
             value={values?.[name]}
             onChange={onChange}

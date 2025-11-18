@@ -8,7 +8,7 @@ const useEffectAfterMount = (cb: EffectCallback, dependencies: DependencyList | 
       return cb()
     }
     mounted.current = false
-  }, dependencies) 
+  }, dependencies)
 }
 
 export { useEffectAfterMount }
