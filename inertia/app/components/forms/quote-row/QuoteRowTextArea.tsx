@@ -19,10 +19,18 @@ const TextArea = ({
 }) => {
 
   const parentRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   
   useEffect(() => {
     if (parentRef.current) {
       parentRef.current.dataset.clonedVal = row[field.id as keyof QuoteRowValues] as string | ''
+    }
+  }, [row, field.id])
+
+  useEffect(() => {
+    if (textareaRef.current && parentRef.current) {
+      const parentWidth = parentRef.current.offsetWidth;
+      textareaRef.current.style.width = `${parentWidth}px`;
     }
   }, [row, field.id])
 
@@ -42,11 +50,15 @@ const TextArea = ({
       after:whitespace-pre-wrap
       after:invisible
       after:content-[attr(data-cloned-val)_'_']
-      after:border"
+      after:border
+      w-full
+      
+      "
     >
       <textarea
+        ref={textareaRef}
         className={cn(
-          'w-full border-0 focus:ring-0  focus:outline-offset-2 focus:outline-blue-200 placeholder:text-gray-300 ',
+          'w-full border-0 focus:ring-0  focus:outline-offset-2 focus:outline-blue-200 placeholder:text-gray-300 pt-2',
           {
             'ring-red-200 ring-2 ': errors?.[`rows.${index}.${field.id as any}`],
           }

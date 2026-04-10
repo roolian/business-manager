@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react'
-import { Button, Label, Pagination, Table, TextInput } from 'flowbite-react'
+import { Button, Label, Pagination, Table, TextInput, TableBody, TableHeadCell, TableHead, TableRow, TableCell } from 'flowbite-react'
 import React, { FC, useEffect } from 'react'
 import { useState } from 'react'
 import _ from 'lodash'
@@ -91,31 +91,31 @@ const CrudList: React.FC<CrudListProps> = ({
       </div>
       <div className="relative overflow-x-auto border border-gray-200  sm:rounded-md">
         <Table hoverable striped draggable>
-          <Table.Head>
+          <TableHead>
             {columns.map((column) => (
-              <Table.HeadCell key={column.name}>
+              <TableHeadCell key={column.name}>
                 <ColumnHead column={column} onUpdate={updateData} query={queryState} />
-              </Table.HeadCell>
+              </TableHeadCell>
             ))}
-            <Table.HeadCell scope="col" className="px-6 py-3"></Table.HeadCell>
-          </Table.Head>
-          <Table.Body>
+            <TableHeadCell scope="col" className="px-6 py-3"></TableHeadCell>
+          </TableHead>
+          <TableBody>
             {crudData.data.map((item: any) => (
-              <Table.Row
+              <TableRow
                 key={item.id}
                 className="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700"
               >
                 {columns.map((column) => (
-                  <Table.Cell
+                  <TableCell
                     key={column.name}
                     scope="row"
                     className="px-6 py-4  text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     {_.get(item, column.name)}
-                  </Table.Cell>
+                  </TableCell>
                 ))}
 
-                <Table.Cell className="px-6 py-4 flex gap-4">
+                <TableCell className="px-6 py-4 flex gap-4">
                   <Link href={`/${pathKey}/` + item.id} className="   hover:text-blue-600">
                     <HiPencilAlt size={20} />
                   </Link>
@@ -128,10 +128,10 @@ const CrudList: React.FC<CrudListProps> = ({
                   >
                     <HiTrash size={20} />
                   </Link>
-                </Table.Cell>
-              </Table.Row>
+                </TableCell>
+              </TableRow>
             ))}
-          </Table.Body>
+          </TableBody>
         </Table>
       </div>
 

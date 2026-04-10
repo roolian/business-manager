@@ -3,6 +3,8 @@ import { getDirname } from '@adonisjs/core/helpers'
 import inertia from '@adonisjs/inertia/client'
 import react from '@vitejs/plugin-react'
 import adonisjs from '@adonisjs/vite/client'
+import tailwind from '@tailwindcss/vite'
+import flowbiteReact from 'flowbite-react/plugin/vite'
 
 export default defineConfig({
   server: {
@@ -18,10 +20,12 @@ export default defineConfig({
       },
     }),
     react(),
+    tailwind(),
     adonisjs({
       entrypoints: ['inertia/app/app.tsx'],
       reload: ['resources/views/**/*.edge'],
     }),
+    flowbiteReact(),
   ],
 
   /**

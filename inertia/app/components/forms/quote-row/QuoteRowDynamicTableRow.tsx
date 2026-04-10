@@ -4,15 +4,11 @@ import { Draggable } from '@hello-pangea/dnd'
 import { TableCell, TableRow } from 'flowbite-react'
 import { cn } from '~/app/libs/utils/cn'
 import { TextArea } from './QuoteRowTextArea'
+import { Field } from "./type"
 
 const inputClass =
   'w-full border-0 focus:ring-0  focus:outline-offset-2 focus:outline-blue-200 placeholder:text-gray-300 '
 
-interface Field {
-  id: string
-  label: string
-  type: 'text' | 'number' | 'textarea'
-}
 
 const rowFieldsDefault: Field[] = [
   { id: 'description', label: 'Description', type: 'textarea' },
@@ -39,24 +35,26 @@ const QuoteRowDynamicTableRow = ({
   onDelete,
 }: QuoteRowDynamicTableRowProps) => {
   return (
-    <Draggable draggableId={`quoteRow-${row.id ?? row.tempId}`} index={index}>
+    <Draggable draggableId={`quoteRow-${row.id ?? row.tempId}`} index={index} >
       {(provided) => (
         <TableRow
-          className="divide-x bg-white border w-full"
+          className="divide-x dark:divide-gray-700 dark:border-gray-700 bg-white dark:bg-gray-800 border-b"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <TableCell className="text-center p-3 w-8">
-            <HiViewGrid size={16} className="text-gray-200" />
+          <TableCell className="text-center p-0  ">
+            <div className="w-12">
+              <HiViewGrid size={16} className="text-gray-200 inline-block" />
+            </div>
           </TableCell>
           {(row.type === 'default' ? rowFieldsDefault : rowFieldsHeading).map((field) => (
             <TableCell
               key={field.id}
               className={cn("py-0 px-1", {
-                ' font-bold': row.type === 'heading' && field.id === 'description',
-                '': row.type === 'default' && field.id === 'description',
-                'w-16': field.id !== 'description',
+                'py-2 font-bold': row.type === 'heading' && field.id === 'description',
+                'flex-1 ': row.type === 'default' && field.id === 'description',
+                'w-28': field.id !== 'description',
               })}
               
               colSpan={row.type === 'default' ? 1 : 4}
@@ -91,7 +89,7 @@ const QuoteRowDynamicTableRow = ({
               )}
             </TableCell>
           ))}
-          <TableCell className="text-center w-16!">
+          <TableCell className="text-center w-20 p-0 ">
             <a className="cursor-pointer hover:text-red-600" onClick={onDelete}>
               <HiTrash size={20} />
             </a>

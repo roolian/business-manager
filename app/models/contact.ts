@@ -18,10 +18,11 @@ export default class Contact extends BaseModel {
   declare lastName: string
 
   @column()
-  declare fullName: string
-
-  @column()
   declare civility: string
+
+  get fullName(): string {
+    return `${this.firstName || ''} ${this.lastName || ''}`.trim()
+  }
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -12,7 +12,7 @@ export interface FieldRowProps {
   children?: React.ReactNode
 }
 
-const FieldRow: FC<FieldRowProps> = ({ children, type, name, label, onChange, values, disabled = false }) => {
+const FieldRow: FC<FieldRowProps> = ({ children, type ='text', name, label, onChange, values, disabled = false }) => {
   const { errors } = usePage().props
 
   const displayField = (type: string) => {
@@ -66,7 +66,7 @@ const FieldRow: FC<FieldRowProps> = ({ children, type, name, label, onChange, va
             id={name}
             value={values?.[name]}
             onChange={onChange}
-            className="w-full h-24 p-2 border rounded"
+            className="w-full h-24 p-2 border rounded-sm"
           />
         )
       default:
@@ -77,7 +77,7 @@ const FieldRow: FC<FieldRowProps> = ({ children, type, name, label, onChange, va
   return (
     <div className="flex gap-8">
       <div className="mb-2 block w-32">
-        <Label htmlFor={name} value={label} />
+        <Label htmlFor={name}  >{label}</Label>
       </div>
       <div className="flex-1 max-w-md">
         {displayField(type)}

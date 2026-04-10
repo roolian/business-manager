@@ -9,7 +9,7 @@ const SelectContact = () => {
   return (
     <div className="max-w-md">
       <div className="mb-2 block">
-        <Label htmlFor="countries" value="Select your country" />
+        <Label htmlFor="countries"  >Select your country</Label>
       </div>
       <Select id="countries" required>
         {options.map((o) => (

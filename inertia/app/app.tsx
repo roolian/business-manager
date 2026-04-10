@@ -5,6 +5,7 @@ import '../css/app.css'
 import { hydrateRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import MainLayout from './components/layouts/MainLayout'
+import { ThemeModeScript } from "flowbite-react"
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -23,6 +24,12 @@ createInertiaApp({
   },
 
   setup({ el, App, props }) {
-    hydrateRoot(el, <App {...props}></App>)
+    hydrateRoot(
+      el,
+      <>
+        <ThemeModeScript/>
+        <App {...props} />
+      </>
+    )
   },
 })

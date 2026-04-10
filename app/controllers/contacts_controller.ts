@@ -15,7 +15,13 @@ export default class ContactsController {
       mainQuery.orderBy('createdAt', 'desc')
     }
     if (queryParams.s) {
-      mainQuery.where('fullName', 'like', `%${queryParams.s}%`)
+      mainQuery.where((query) => {
+        query.where('firstName', 'like', `%${queryParams.s}%`)
+          .orWhere('lastName', 'like', `%${queryParams.s}%`)
+          .orWhereHas('client', (clientQuery) => {
+            clientQuery.where('name', 'like', `%${queryParams.s}%`)
+          })
+      })
     }
 
     const models = await mainQuery.paginate(queryParams.page ?? 1, 8)

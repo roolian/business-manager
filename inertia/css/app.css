@@ -1,14 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import 'flowbite-react/plugin/tailwindcss';
+@source '../../.flowbite-react/class-list.json';
+
+/* @config '../../tailwind.config.js'; */
+
+
 
 /*
-fixme   not able to add classes easily to the root component
-        https://github.com/inertiajs/inertia-laravel/issues/370
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
 */
-#app {
-  @apply h-screen;
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
+
 
 .page-content {
   @apply p-10;

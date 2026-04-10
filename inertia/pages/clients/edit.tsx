@@ -1,6 +1,6 @@
 import Client from '#models/client'
 import Contact from '#models/contact'
-import { Button, Modal, Table } from 'flowbite-react'
+import { Button, Modal, Table, TableHead, TableHeadCell, TableBody, TableRow, TableCell, ModalBody } from 'flowbite-react'
 import { useState } from 'react'
 import { HiPencilAlt } from 'react-icons/hi'
 import { toast } from 'react-toastify'
@@ -57,31 +57,31 @@ export default function ClientIndex({ client }: ClientEditProps) {
 
         <h2 className="mb-6">Contacts chez le client</h2>
         <Table className="max-w-xl ">
-          <Table.Head>
-            <Table.HeadCell>
+          <TableHead>
+            <TableHeadCell>
               <span>Nom</span>
-            </Table.HeadCell>
-            <Table.HeadCell>
+            </TableHeadCell>
+            <TableHeadCell>
               <span>Prénom</span>
-            </Table.HeadCell>
+            </TableHeadCell>
 
-            <Table.HeadCell>
+            <TableHeadCell>
               <span>Actions</span>
-            </Table.HeadCell>
-          </Table.Head>
-          <Table.Body className="divide-y">
+            </TableHeadCell>
+          </TableHead>
+          <TableBody className="divide-y">
             {client.contacts.map((c: Contact) => (
-              <Table.Row key={c.id}>
-                <Table.Cell className="">{c.lastName}</Table.Cell>
-                <Table.Cell className="">{c.firstName}</Table.Cell>
-                <Table.Cell className="">
+              <TableRow key={c.id}>
+                <TableCell className="">{c.lastName}</TableCell>
+                <TableCell className="">{c.firstName}</TableCell>
+                <TableCell className="">
                   <div onClick={() => setContact(c)} className="hover:text-blue-600">
                     <HiPencilAlt size={20} />
                   </div>
-                </Table.Cell>
-              </Table.Row>
+                </TableCell>
+              </TableRow>
             ))}
-          </Table.Body>
+          </TableBody>
         </Table>
 
         <Button
@@ -131,9 +131,9 @@ interface ModalFormProps {
 
 const ModalForm = ({ isOpen, title, onClose, onSubmit, contact, client }: ModalFormProps) => (
   <Modal show={isOpen} onClose={onClose} dismissible>
-    <Modal.Body>
+    <ModalBody>
       {title && <h3 className="mb-8">{title}</h3>}
       <ContactForm onSubmit={onSubmit} contact={contact} isModal clientId={client.id} />
-    </Modal.Body>
+    </ModalBody>
   </Modal>
 )

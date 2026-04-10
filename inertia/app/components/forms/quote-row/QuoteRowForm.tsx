@@ -1,5 +1,4 @@
 import Quote from '#models/quote'
-import QuoteRow from '#models/quote_row'
 import { QuoteRowType } from '#types/quote_type'
 import { usePage } from '@inertiajs/react'
 import {
@@ -14,12 +13,9 @@ import {
 import { useEffect, useState } from 'react'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { Field, QuoteRowDynamicTableRow } from './QuoteRowDynamicTableRow'
+import { QuoteRowFormValues, QuoteRowValues } from "./type"
 
-interface QuoteRowValues extends Partial<QuoteRow> {
-  tempId?: number
-}
 
-type QuoteRowFormValues = { rows: QuoteRowValues[] }
 
 interface QuoteRowFormProps {
   quote: Quote
@@ -98,13 +94,13 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
       <h2>Quote Rows</h2>
       <DragDropContext onDragEnd={onDragEnd}>
         <Table>
-          <TableHead>
-            <TableHeadCell className="p-2 w-8"></TableHeadCell>
-            <TableHeadCell className="p-2">Description</TableHeadCell>
-            <TableHeadCell className="p-2 w-16">Amount</TableHeadCell>
-            <TableHeadCell className="p-2 w-16">Unit</TableHeadCell>
-            <TableHeadCell className="p-2 w-16">Quantity</TableHeadCell>
-            <TableHeadCell className="p-2 w-16"></TableHeadCell>
+          <TableHead className="">
+            <TableHeadCell className="p-2 w-10"></TableHeadCell>
+            <TableHeadCell className="p-2 w-auto">Description</TableHeadCell>
+            <TableHeadCell className="p-2 w-20">Amount</TableHeadCell>
+            <TableHeadCell className="p-2 w-20">Unit</TableHeadCell>
+            <TableHeadCell className="p-2 w-20">Quantity</TableHeadCell>
+            <TableHeadCell className="p-2 w-20"></TableHeadCell>
           </TableHead>
           <Droppable droppableId={`quoteRow`} >
             {(provided) => (

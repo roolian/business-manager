@@ -1,25 +1,24 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Sidebar } from 'flowbite-react'
+import { DarkThemeToggle, Sidebar, SidebarItem, SidebarItemGroup, SidebarItems, SidebarLogo } from 'flowbite-react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { FaAddressBook, FaBuilding, FaCalculator, FaChartPie } from 'react-icons/fa6'
-
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { url } = usePage()
 
   return (
     <>
-      <main className="flex h-full ">
+      <main className="flex h-full dark:bg-gray-900 min-h-screen">
         <div className="w-72">
           <Sidebar aria-label="Default sidebar example" className="w-full bg-none">
-            <Sidebar.Logo href="/" img="/images/logoipsum-325.svg" imgAlt="Flowbite logo" />
-            <Sidebar.Items>
-              <Sidebar.ItemGroup className="bg-none">
-                <Sidebar.Item as={Link} href="/" icon={FaChartPie} active={url === '/'}>
+            <SidebarLogo href="/" img="/images/logoipsum-325.svg" imgAlt="Flowbite logo" />
+            <SidebarItems>
+              <SidebarItemGroup className="bg-none">
+                <SidebarItem as={Link} href="/" icon={FaChartPie} active={url === '/'}>
                   Dashboard
-                </Sidebar.Item>
-                <Sidebar.Item
+                </SidebarItem>
+                <SidebarItem
                   as={Link}
                   href="/clients"
                   icon={FaBuilding}
@@ -27,8 +26,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   active={url === '/clients'}
                 >
                   Clients
-                </Sidebar.Item>
-                <Sidebar.Item
+                </SidebarItem>
+                <SidebarItem
                   as={Link}
                   href="/contacts"
                   icon={FaAddressBook}
@@ -36,8 +35,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   active={url === '/contacts'}
                 >
                   Contacts
-                </Sidebar.Item>
-                <Sidebar.Item
+                </SidebarItem>
+                <SidebarItem
                   as={Link}
                   href="/quotes"
                   icon={FaCalculator}
@@ -45,9 +44,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   active={url === '/quotes'}
                 >
                   Devis
-                </Sidebar.Item>
-              </Sidebar.ItemGroup>
-            </Sidebar.Items>
+                </SidebarItem>
+              </SidebarItemGroup>
+              <SidebarItemGroup>
+                <DarkThemeToggle />
+              </SidebarItemGroup>
+            </SidebarItems>
           </Sidebar>
         </div>
 
