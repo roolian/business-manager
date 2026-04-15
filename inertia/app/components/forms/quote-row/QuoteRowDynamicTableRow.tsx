@@ -17,7 +17,7 @@ const rowFieldsDefault: Field[] = [
   { id: 'quantity', label: 'Quantity', type: 'number' },
 ]
 
-const rowFieldsHeading: Field[] = [{ id: 'description', label: 'Description', type: 'text' }]
+const rowFieldsHeading: Field[] = [{ id: 'description', label: 'Description', type: 'textarea' }]
 
 interface QuoteRowDynamicTableRowProps {
   row: QuoteRowValues
@@ -59,7 +59,7 @@ const QuoteRowDynamicTableRow = ({
               
               colSpan={row.type === 'default' ? 1 : 4}
             >
-              {field.type === 'textarea' ? (
+              {['textarea'].includes(field.type) ? (
                 <TextArea
                   index={index}
                   errors={errors}

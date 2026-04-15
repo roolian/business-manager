@@ -1,8 +1,8 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link, router, usePage } from '@inertiajs/react'
 import { DarkThemeToggle, Sidebar, SidebarItem, SidebarItemGroup, SidebarItems, SidebarLogo } from 'flowbite-react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { FaAddressBook, FaBuilding, FaCalculator, FaChartPie } from 'react-icons/fa6'
+import { FaAddressBook, FaBuilding, FaCalculator, FaChartPie, FaRightFromBracket } from 'react-icons/fa6'
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { url } = usePage()
@@ -48,6 +48,14 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               </SidebarItemGroup>
               <SidebarItemGroup>
                 <DarkThemeToggle />
+                <SidebarItem
+                  as="button"
+                  onClick={() => router.post('/logout')}
+                  icon={FaRightFromBracket}
+                  className="cursor-pointer"
+                >
+                  Déconnexion
+                </SidebarItem>
               </SidebarItemGroup>
             </SidebarItems>
           </Sidebar>
