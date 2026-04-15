@@ -2,7 +2,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import { DarkThemeToggle, Sidebar, SidebarItem, SidebarItemGroup, SidebarItems, SidebarLogo } from 'flowbite-react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { FaAddressBook, FaBuilding, FaCalculator, FaChartPie, FaRightFromBracket } from 'react-icons/fa6'
+import { FaAddressBook, FaBuilding, FaCalculator, FaChartPie, FaFolderOpen, FaFileInvoice, FaRightFromBracket } from 'react-icons/fa6'
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { url } = usePage()
@@ -44,6 +44,24 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   active={url === '/quotes'}
                 >
                   Devis
+                </SidebarItem>
+                <SidebarItem
+                  as={Link}
+                  href="/projects"
+                  icon={FaFolderOpen}
+                  labelColor="dark"
+                  active={url === '/projects'}
+                >
+                  Projets
+                </SidebarItem>
+                <SidebarItem
+                  as={Link}
+                  href="/invoices"
+                  icon={FaFileInvoice}
+                  labelColor="dark"
+                  active={url === '/invoices'}
+                >
+                  Factures
                 </SidebarItem>
               </SidebarItemGroup>
               <SidebarItemGroup>

@@ -1,8 +1,8 @@
 import { ColumnInterface, CrudList, CrudListQuery } from '../crud/CrudList'
 import { ModelObject } from '@adonisjs/lucid/types/model'
 
-interface QuoteIndexProps {
-  quotesData: {
+interface ProjectIndexProps {
+  projectsData: {
     meta?: any
     data: ModelObject[]
   }
@@ -10,31 +10,26 @@ interface QuoteIndexProps {
   onQueryUpdate: (newQuery: CrudListQuery) => void
 }
 
-const QuoteIndex = ({ quotesData, queryParams, onQueryUpdate }: QuoteIndexProps) => {
+const ProjectIndex = ({ projectsData, queryParams, onQueryUpdate }: ProjectIndexProps) => {
   const columns: ColumnInterface[] = [
     {
-      name: 'quote.id',
-      label: 'ID',
+      name: 'project.name',
+      label: 'Name',
       sortable: true,
     },
     {
-      name: 'contact.lastName',
-      label: 'Contact Last Name',
+      name: 'project.type',
+      label: 'Type',
       sortable: true,
     },
     {
-      name: 'contact.firstName',
-      label: 'Contact First Name',
+      name: 'project.status',
+      label: 'Status',
       sortable: true,
     },
     {
       name: 'client.name',
       label: 'Client',
-      sortable: true,
-    },
-    {
-      name: 'amount',
-      label: 'Amount',
       sortable: true,
     },
     {
@@ -47,14 +42,14 @@ const QuoteIndex = ({ quotesData, queryParams, onQueryUpdate }: QuoteIndexProps)
   return (
     <>
       <CrudList
-        crudData={quotesData}
+        crudData={projectsData}
         crudListQuery={queryParams}
         onQueryUpdate={onQueryUpdate}
-        pathKey="quotes"
+        pathKey="projects"
         columns={columns}
       />
     </>
   )
 }
 
-export default QuoteIndex
+export default ProjectIndex

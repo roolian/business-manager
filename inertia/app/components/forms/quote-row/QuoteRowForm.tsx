@@ -50,7 +50,6 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
   }
 
   const onDragEnd = (result: any) => {
-    console.log(result)
     const { source, destination } = result
     if (!destination) return
 
@@ -70,7 +69,6 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
   }
 
   useEffect(() => {
-    console.log(quoteRows)
   }, [quoteRows])
 
   const getNextOrder = () => {
@@ -113,7 +111,6 @@ const QuoteRowForm = ({ quote, onSubmit, onDelete, className }: QuoteRowFormProp
                     errors={errors}
                     onChange={(e, field: Field) => {
                       setQuoteRows((currentRows) => {
-                        console.log(currentRows)
                         const newRows = [...currentRows]
                         const newRow: QuoteRowValues = newRows[index] ?? {
                           order: index + 1,

@@ -11,6 +11,8 @@ const AuthController = () => import('#controllers/auth_controller')
 const ClientsController = () => import('#controllers/clients_controller')
 const ContactsController = () => import('#controllers/contacts_controller')
 const QuotesController = () => import('#controllers/quotes_controller')
+const ProjectsController = () => import('#controllers/projects_controller')
+const InvoicesController = () => import('#controllers/invoices_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 
@@ -45,4 +47,21 @@ router.group(() => {
   router.post('quotes/:id/rows', [QuotesController, 'updateRows'])
   router.delete('quotes/:id/rows/:rowId', [QuotesController, 'deleteRow'])
   router.delete('quotes/:id', [QuotesController, 'delete'])
+
+  router.get('projects', [ProjectsController, 'index']).as('projects.index')
+  router.get('projects/create', [ProjectsController, 'create']).as('projects.create')
+  router.post('projects/create', [ProjectsController, 'store'])
+  router.get('projects/:id', [ProjectsController, 'edit']).as('projects.edit')
+  router.post('projects/:id', [ProjectsController, 'update'])
+  router.delete('projects/:id', [ProjectsController, 'delete'])
+
+  router.get('projects/:projectId/invoices/create', [InvoicesController, 'create']).as('project.invoices.create')
+  router.post('projects/:projectId/invoices/create', [InvoicesController, 'store'])
+  router.get('invoices', [InvoicesController, 'index']).as('invoices.index')
+  router.get('invoices/create', [InvoicesController, 'create']).as('invoices.create')
+  router.post('invoices/create', [InvoicesController, 'store'])
+  router.get('invoices/:id', [InvoicesController, 'edit']).as('invoices.edit')
+  router.post('invoices/:id', [InvoicesController, 'update'])
+  router.delete('invoices/:id', [InvoicesController, 'delete'])
+  router.post('projects/:id/generate-maintenance-invoice', [InvoicesController, 'generateNextMaintenanceInvoice']).as('projects.generateMaintenanceInvoice')
 }).use(middleware.auth())

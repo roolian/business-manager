@@ -4,6 +4,7 @@ import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
 import QuoteRow from '#models/quote_row'
 import Contact from '#models/contact'
+import Project from '#models/project'
 import type { ValidationStatus } from '#types/quote_type'
 
 export default class Quote extends BaseModel {
@@ -18,6 +19,9 @@ export default class Quote extends BaseModel {
 
   @column()
   declare contactId: number
+
+  @column()
+  declare projectId: number | null
 
   @column()
   declare title: string
@@ -36,6 +40,9 @@ export default class Quote extends BaseModel {
 
   @belongsTo(() => Contact)
   declare contact: BelongsTo<typeof Contact>
+
+  @belongsTo(() => Project)
+  declare project: BelongsTo<typeof Project>
 
   @hasMany(() => QuoteRow)
   declare rows: HasMany<typeof QuoteRow>
